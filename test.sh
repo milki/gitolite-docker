@@ -15,11 +15,12 @@ do
     echo Waiting for ssh server to accept connections...
     sleep 1
 done
+ssh-keyscan localhost >> /etc/ssh/ssh_known_hosts 2>/dev/null
 
-export HOME=/home/gtest
-export USER=gtest
-export PATH=/home/gtest/bin:$PATH
+export HOME=/home/g3
+export USER=g3
+export PATH=/home/g3/bin:$PATH
 
-cd /home/gtest/gitolite
+cd /home/g3/gitolite
 echo Running: /usr/bin/prove $@...
-setuidgid gtest /usr/bin/prove $@
+setuidgid g3 /usr/bin/prove $@

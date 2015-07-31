@@ -4,11 +4,17 @@ MAINTAINER milki <milki@milki.ircmylife.com>
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get install -y openssh-server perl git
-RUN apt-get install -y daemontools libjson-perl
+RUN apt-get install -y daemontools sudo libjson-perl
 
-RUN adduser --shell /bin/sh --disabled-password --gecos "Gitolite Test User" gtest
-RUN mkdir /home/gtest/bin && mkdir /home/gtest/.ssh && chown -R gtest:gtest /home/gtest
-RUN setuidgid gtest git clone git://github.com/sitaramc/gitolite /home/gtest/gitolite
+RUN adduser --shell /bin/sh --disabled-password --gecos "Gitolite Test User" g3 && \
+    adduser --shell /bin/sh --disabled-password --gecos "Gitolite Test User" frodo && \
+    adduser --shell /bin/sh --disabled-password --gecos "Gitolite Test User" sam && \
+    adduser --shell /bin/sh --disabled-password --gecos "Gitolite Test User" gollum
+RUN echo "g3 ALL = (sam,frodo,gollum) NOPASSWD: ALL" >> /etc/sudoers
+
+RUN mkdir /home/g3/bin && mkdir /home/g3/.ssh && chown -R g3:g3 /home/g3
+RUN setuidgid g3 git clone mirror_testing git://github.com/sitaramc/gitolite /home/g3/gitolite
+
 
 # Enable gitolite testing
 ENV GITOLITE_TEST y
