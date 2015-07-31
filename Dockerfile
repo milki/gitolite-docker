@@ -13,7 +13,7 @@ RUN adduser --shell /bin/sh --disabled-password --gecos "Gitolite Test User" g3 
 RUN echo "g3 ALL = (sam,frodo,gollum) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN mkdir /home/g3/bin && mkdir /home/g3/.ssh && chown -R g3:g3 /home/g3
-RUN setuidgid g3 git clone mirror_testing git://github.com/sitaramc/gitolite /home/g3/gitolite
+RUN setuidgid g3 git clone --branch fix_mirror_test git://github.com/milki/gitolite /home/g3/gitolite
 
 
 # Enable gitolite testing
